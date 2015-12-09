@@ -68,18 +68,15 @@ void DrawShape(Graphics g, Brush b, Pen p, int x, int y, int r, bool fill, bool 
     }
 }
 
-void DrawShapes(Graphics g, Brush b, Pen p, double x, double y, double r, ColorBgra c, ColorBgra cF, bool fill, bool outline, int verts, int rotVal)
+void DrawShapes(Graphics g, Brush b, Pen p, double x, double y, double r, bool fill, bool outline, int verts, int rotVal)
 {
     if (r <= 1) return;
 
     DrawShape(g, b, p, (int)x, (int)y, (int)r, fill, outline, verts, rotVal);
-    Pen newPen = new Pen(c);
-    SolidBrush newBrush = new SolidBrush(cF);
-    newPen.Width = Amount6;
     for (double Ang = 360; Ang >= 0; Ang -= Math.Ceiling(360.00 / Amount1))
     {
-        DrawShapes(g, newBrush, newPen, x + (2 * r) * Math.Cos(Ang / 180 * Math.PI),
-        y + (2 * r) * Math.Sin(Ang / 180 * Math.PI), r / 3, c, cF, fill, outline, verts, (Amount9 ? (int)Ang : 0));
+        DrawShapes(g, b, p, x + (2 * r) * Math.Cos(Ang / 180 * Math.PI),
+        y + (2 * r) * Math.Sin(Ang / 180 * Math.PI), r / 3, fill, outline, verts, (Amount9 ? (int)Ang : 0));
     }
 }
 
@@ -95,5 +92,5 @@ void Render(Surface dst, Surface src, Rectangle rect)
     Pen myPen = new Pen(Amount7, Amount6);
     SolidBrush myBrush = new SolidBrush(Amount4);
     double r = Amount8 / 100.00 * Math.Min(selection.Right - selection.Left, selection.Bottom - selection.Top) / 6;
-    DrawShapes(canvas, myBrush, myPen, CenterX, CenterY, r, Amount7, Amount4, Amount3, Amount5, Amount2, 0);
+    DrawShapes(canvas, myBrush, myPen, CenterX, CenterY, r, Amount3, Amount5, Amount2, 0);
 }

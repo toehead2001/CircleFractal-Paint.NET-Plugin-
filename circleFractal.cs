@@ -73,6 +73,7 @@ void DrawShapes(Graphics g, Brush b, Pen p, double x, double y, double r, bool f
     if (r <= 1) return;
 
     DrawShape(g, b, p, (int)x, (int)y, (int)r, fill, outline, verts, rotVal);
+
     for (double Ang = 360; Ang >= 0; Ang -= Math.Ceiling(360.00 / Amount1))
     {
         DrawShapes(g, b, p, x + (2 * r) * Math.Cos(Ang / 180 * Math.PI),
@@ -83,9 +84,10 @@ void DrawShapes(Graphics g, Brush b, Pen p, double x, double y, double r, bool f
 void Render(Surface dst, Surface src, Rectangle rect)
 {
     Rectangle selection = EnvironmentParameters.GetSelection(src.Bounds).GetBoundsInt();
-    dst.CopySurface(src, rect.Location, rect);
     int CenterX = ((selection.Right - selection.Left) / 2) + selection.Left;
     int CenterY = ((selection.Bottom - selection.Top) / 2) + selection.Top;
+
+    dst.CopySurface(src, rect.Location, rect);
 
     using (RenderArgs ra = new RenderArgs(dst))
     {

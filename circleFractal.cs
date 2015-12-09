@@ -87,7 +87,6 @@ void DrawShapes(Graphics g, Brush b, Pen p, double x, double y, double r, ColorB
 
 void Render(Surface dst, Surface src, Rectangle rect)
 {
-
     Rectangle selection = EnvironmentParameters.GetSelection(src.Bounds).GetBoundsInt();
     dst.CopySurface(src, rect.Location, rect);
     int CenterX = ((selection.Right - selection.Left) / 2) + selection.Left;
@@ -102,15 +101,4 @@ void Render(Surface dst, Surface src, Rectangle rect)
     myPen.Width = Amount6;
     double r = ((double)Amount8 / 100.00) * Math.Min(selection.Right - selection.Left, selection.Bottom - selection.Top) / 6;
     DrawShapes(canvas, myBrush, myPen, CenterX, CenterY, r, Amount7, Amount4, Amount3, Amount5, Amount2, 0);
-
-    ColorBgra CurrentPixel;
-    for (int y = rect.Top; y < rect.Bottom; y++)
-    {
-        if (IsCancelRequested) return;
-        for (int x = rect.Left; x < rect.Right; x++)
-        {
-            CurrentPixel = src[x, y];
-            dst[x, y] = CurrentPixel;
-        }
-    }
 }

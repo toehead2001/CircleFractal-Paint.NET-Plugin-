@@ -86,11 +86,14 @@ void Render(Surface dst, Surface src, Rectangle rect)
     dst.CopySurface(src, rect.Location, rect);
     int CenterX = ((selection.Right - selection.Left) / 2) + selection.Left;
     int CenterY = ((selection.Bottom - selection.Top) / 2) + selection.Top;
-    Graphics canvas = new RenderArgs(dst).Graphics;
 
-    canvas.SmoothingMode = Amount10 ? System.Drawing.Drawing2D.SmoothingMode.AntiAlias : System.Drawing.Drawing2D.SmoothingMode.None;
-    Pen myPen = new Pen(Amount7, Amount6);
-    SolidBrush myBrush = new SolidBrush(Amount4);
-    double r = Amount8 / 100.00 * Math.Min(selection.Right - selection.Left, selection.Bottom - selection.Top) / 6;
-    DrawShapes(canvas, myBrush, myPen, CenterX, CenterY, r, Amount3, Amount5, Amount2, 0);
+    using (RenderArgs ra = new RenderArgs(dst))
+    {
+        Graphics canvas = ra.Graphics;
+        canvas.SmoothingMode = Amount10 ? System.Drawing.Drawing2D.SmoothingMode.AntiAlias : System.Drawing.Drawing2D.SmoothingMode.None;
+        Pen myPen = new Pen(Amount7, Amount6);
+        SolidBrush myBrush = new SolidBrush(Amount4);
+        double r = Amount8 / 100.00 * Math.Min(selection.Right - selection.Left, selection.Bottom - selection.Top) / 6;
+        DrawShapes(canvas, myBrush, myPen, CenterX, CenterY, r, Amount3, Amount5, Amount2, 0);
+    }
 }

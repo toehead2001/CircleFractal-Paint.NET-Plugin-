@@ -22,7 +22,6 @@ int lengthdirY(int length, double dir)
 
 void DrawShape(Graphics g, Brush b, Pen p, int x, int y, int r, bool fill, bool outline, int verts, int rot)
 {
-
     if (verts > 10)
     {
         Rectangle rect1 = new Rectangle(x - r, y - r, r * 2, r * 2);
@@ -33,7 +32,6 @@ void DrawShape(Graphics g, Brush b, Pen p, int x, int y, int r, bool fill, bool 
     {
         if (fill)
         {
-
             System.Drawing.PointF[] shapePoints = new System.Drawing.PointF[verts];
             int length = (int)(2 * r * Math.Sin(Math.PI / verts)),
                 originalAngle = (180 - (verts - 2) * 180 / verts) / 2,
@@ -91,11 +89,9 @@ void Render(Surface dst, Surface src, Rectangle rect)
     dst.CopySurface(src, rect.Location, rect);
     int CenterX = ((selection.Right - selection.Left) / 2) + selection.Left;
     int CenterY = ((selection.Bottom - selection.Top) / 2) + selection.Top;
-    ColorBgra PrimaryColor = (ColorBgra)EnvironmentParameters.PrimaryColor;
     Graphics canvas = new RenderArgs(dst).Graphics;
 
     canvas.SmoothingMode = Amount10 ? System.Drawing.Drawing2D.SmoothingMode.AntiAlias : System.Drawing.Drawing2D.SmoothingMode.None;
-    int BrushWidth = (int)EnvironmentParameters.BrushWidth;
     Pen myPen = new Pen(Amount7);
     SolidBrush myBrush = new SolidBrush(Amount4);
     myPen.Width = Amount6;

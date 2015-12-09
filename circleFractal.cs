@@ -38,12 +38,12 @@ void DrawShape(Graphics g, Brush b, Pen p, int x, int y, int r, bool fill, bool 
             int length = (int)(2 * r * Math.Sin(Math.PI / verts)),
                 originalAngle = (180 - (verts - 2) * 180 / verts) / 2,
             angle = rot + originalAngle;
-            shapePoints[0] = new System.Drawing.PointF((float)(x - lengthdirX(r, 270 - rot)), (float)(y + lengthdirY(r, 270 - rot)));
+            shapePoints[0] = new System.Drawing.PointF(x - lengthdirX(r, 270 - rot), y + lengthdirY(r, 270 - rot));
             for (int i = 1; i < verts; i++)
             {
                 float xx = shapePoints[i - 1].X + lengthdirX(length, angle),
                 yy = shapePoints[i - 1].Y + lengthdirY(length, angle);
-                shapePoints[i] = new System.Drawing.PointF((float)xx, (float)yy);
+                shapePoints[i] = new System.Drawing.PointF(xx, yy);
                 angle = (angle + originalAngle * 2) % 360;
             }
             System.Drawing.Drawing2D.FillMode newFillMode = System.Drawing.Drawing2D.FillMode.Winding;
@@ -78,7 +78,7 @@ void DrawShapes(Graphics g, Brush b, Pen p, double x, double y, double r, ColorB
     Pen newPen = new Pen(c);
     SolidBrush newBrush = new SolidBrush(cF);
     newPen.Width = Amount6;
-    for (double Ang = 360; Ang >= 0; Ang -= Math.Ceiling((double)(360.00 / (Amount1))))
+    for (double Ang = 360; Ang >= 0; Ang -= Math.Ceiling(360.00 / Amount1))
     {
         DrawShapes(g, newBrush, newPen, x + (2 * r) * Math.Cos(Ang / 180 * Math.PI),
         y + (2 * r) * Math.Sin(Ang / 180 * Math.PI), r / 3, c, cF, fill, outline, verts, (Amount9 ? (int)Ang : 0));
@@ -99,6 +99,6 @@ void Render(Surface dst, Surface src, Rectangle rect)
     Pen myPen = new Pen(Amount7);
     SolidBrush myBrush = new SolidBrush(Amount4);
     myPen.Width = Amount6;
-    double r = ((double)Amount8 / 100.00) * Math.Min(selection.Right - selection.Left, selection.Bottom - selection.Top) / 6;
+    double r = Amount8 / 100.00 * Math.Min(selection.Right - selection.Left, selection.Bottom - selection.Top) / 6;
     DrawShapes(canvas, myBrush, myPen, CenterX, CenterY, r, Amount7, Amount4, Amount3, Amount5, Amount2, 0);
 }

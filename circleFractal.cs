@@ -92,6 +92,7 @@ void Render(Surface dst, Surface src, Rectangle rect)
     using (RenderArgs ra = new RenderArgs(dst))
     {
         Graphics canvas = ra.Graphics;
+        canvas.Clip = new Region(rect);
         canvas.SmoothingMode = Amount10 ? System.Drawing.Drawing2D.SmoothingMode.AntiAlias : System.Drawing.Drawing2D.SmoothingMode.None;
         Pen myPen = new Pen(Amount7, Amount6);
         SolidBrush myBrush = new SolidBrush(Amount4);
